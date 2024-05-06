@@ -1,7 +1,7 @@
 # PHP-Cronjob-Controller
 
 ## About CronController
-
+The configurators main purpose is to create request loops to bypass timeouts.
 The CronController class manages the execution of cron jobs with a focus on easy integration, dynamic task management, and thorough logging. This PHP class provides a structured way to handle cron tasks by specifying execution intervals, implementing dynamic task addition, and performing logging for both monitoring and debugging. The objective is to offer a clean and reusable solution for managing scheduled tasks in PHP projects.
 
 ## Features
@@ -49,8 +49,8 @@ Specify optional flags for custom behavior:
 
 ```php
 $cron_flags = [
-    "allow_dynamic_tasks" => true, // Allow the dynamic addition of tasks after initial setting
-    "iteration_custom_headers" => [ // Custom headers for each iteration
+    "allow_dynamic_tasks" => false, // Allow the dynamic addition of tasks after initial setting, could cause infinite loops!
+    "iteration_custom_headers" => [ // Custom headers for each iteration, will be used as: ```header("CUSTOM_HEADER: " . $value);```
         "CUSTOM_HEADER" => "value"
     ]
 ];
@@ -80,14 +80,14 @@ if (!$cronController->getTasks()) {
 }
 
 // Pop and handle a task
-$task = $cronController->popTask();
+$task = $cronController->popTask(); //There are multiple ways to do this according to your needs, check the class file for more examples!
 // Perform operations...
 
 // Log any actions or outcomes
 $cronController->logAction("Performed operation on '$task'", 'Success');
 
 // Iterate to the next task or finalize the cron job
-$cronController->iterateOrDie();
+$cronController->iterateOrDie(); //this will either send header() or die()
 ```
 
 ### Tips for Use
