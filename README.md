@@ -17,7 +17,7 @@ The CronController class manages the execution of cron jobs with a focus on easy
 To use the CronController class, clone this repository or copy the `CronController.php` file into your project.
 
 ```sh
-git clone https://github.com/[your-github]/cron-controller-php.git
+git clone https://github.com/gecexgokyuzu/PHP-Cronjob-Controller
 ```
 
 ### Prerequisites
